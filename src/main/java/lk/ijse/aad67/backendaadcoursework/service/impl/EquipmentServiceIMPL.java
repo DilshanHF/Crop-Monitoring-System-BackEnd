@@ -1,19 +1,20 @@
 package lk.ijse.aad67.backendaadcoursework.service.impl;
 
-import Final.springBoot.backend.customStatusCode.SelectedErrorStatus;
-import Final.springBoot.backend.dao.EquipmentDao;
-import Final.springBoot.backend.dao.FieldDao;
-import Final.springBoot.backend.dao.StaffDao;
-import Final.springBoot.backend.dto.impl.EquipmentDto;
-import Final.springBoot.backend.dto.status.Status;
-import Final.springBoot.backend.entity.impl.EquipmentEntity;
-import Final.springBoot.backend.exception.DataPersistException;
-import Final.springBoot.backend.exception.ItemNotFoundException;
-import Final.springBoot.backend.service.EquipmentService;
-import Final.springBoot.backend.util.Mapping;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import lk.ijse.aad67.backendaadcoursework.customStatusCode.SelectedErrorStatus;
+import lk.ijse.aad67.backendaadcoursework.dao.EquipmentDao;
+import lk.ijse.aad67.backendaadcoursework.dao.FieldDao;
+import lk.ijse.aad67.backendaadcoursework.dao.StaffDao;
+import lk.ijse.aad67.backendaadcoursework.dto.impl.EquipmentDto;
+import lk.ijse.aad67.backendaadcoursework.dto.status.Status;
+import lk.ijse.aad67.backendaadcoursework.entity.impl.EquipmentEntity;
+import lk.ijse.aad67.backendaadcoursework.exception.DataPersistException;
+import lk.ijse.aad67.backendaadcoursework.exception.ItemNotFoundException;
+import lk.ijse.aad67.backendaadcoursework.service.EquipmentService;
+import lk.ijse.aad67.backendaadcoursework.utill.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

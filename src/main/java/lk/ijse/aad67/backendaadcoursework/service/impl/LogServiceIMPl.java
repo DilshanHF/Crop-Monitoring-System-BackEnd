@@ -1,18 +1,19 @@
 package lk.ijse.aad67.backendaadcoursework.service.impl;
 
-import Final.springBoot.backend.customStatusCode.SelectedErrorStatus;
-import Final.springBoot.backend.dao.LogDao;
-import Final.springBoot.backend.dto.impl.LogDto;
-import Final.springBoot.backend.dto.status.Status;
-import Final.springBoot.backend.entity.impl.LogEntity;
-import Final.springBoot.backend.exception.DataPersistException;
-import Final.springBoot.backend.exception.ItemNotFoundException;
-import Final.springBoot.backend.service.LogService;
-import Final.springBoot.backend.util.Mapping;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import lk.ijse.aad67.backendaadcoursework.customStatusCode.SelectedErrorStatus;
+import lk.ijse.aad67.backendaadcoursework.dao.LogDao;
+import lk.ijse.aad67.backendaadcoursework.dto.impl.LogDto;
+import lk.ijse.aad67.backendaadcoursework.dto.status.Status;
+import lk.ijse.aad67.backendaadcoursework.entity.impl.LogEntity;
+import lk.ijse.aad67.backendaadcoursework.exception.DataPersistException;
+import lk.ijse.aad67.backendaadcoursework.exception.ItemNotFoundException;
+import lk.ijse.aad67.backendaadcoursework.service.LogService;
+import lk.ijse.aad67.backendaadcoursework.utill.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
