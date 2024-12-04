@@ -1,7 +1,13 @@
 package lk.ijse.aad67.backendaadcoursework.controllers;
 
 
+import lk.ijse.aad67.backendaadcoursework.dto.impl.StaffDto;
+import lk.ijse.aad67.backendaadcoursework.entity.Gender;
+import lk.ijse.aad67.backendaadcoursework.entity.JobDesignation;
+import lk.ijse.aad67.backendaadcoursework.entity.JobRole;
+import lk.ijse.aad67.backendaadcoursework.exception.DataPersistException;
 import lk.ijse.aad67.backendaadcoursework.service.StaffService;
+import lk.ijse.aad67.backendaadcoursework.utill.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/staff")
 public class StaffController {
@@ -20,7 +31,7 @@ public class StaffController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> saveStaff(
+    public ResponseEntity<String> saveStaff(
             @RequestPart("staffId") String staffId,
             @RequestPart("firstName") String firstName,
             @RequestPart("lastName") String lastName,
@@ -40,9 +51,74 @@ public class StaffController {
             @RequestPart("logCode") String logCode,
             @RequestPart("fieldIds") String staffIdsString
     ){
-        try {
-            cropService.saveCrop(assignValue(cropCode,cropCommonName,cropScientificName,cropCategory,cropImage,cropSeason,fieldCode,logCode));
-            return new ResponseEntity<>(HttpStatus.CREATED);
+        List<String> staffIds = Arrays.asList(staffIdsString.split(","));
+        if ("NoAssign".equals(staffIds.get(0))) {
+            staffIds = new ArrayList<>();
         }
+        StaffDto staffDto = null;
+
+        try {
+            staffDto = assignValue(
+                    staffId, firstName, lastName, staffDesignation, gender, joinedDate, DOB,
+                    AddressLine01, AddressLine02, AddressLine03, AddressLine04, AddressLine05,
+                    contact, email, jobRole, image, logCode, staffIds
+            );
+
+            staffService.saveStaff(staffDto);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body("Staff saved successfully." + "fields Ids:" + staffDto.getFields());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }catch (DataPersistException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to save staff data.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred." + staffDto.getFields());
+        }
+
+
+    }
+    private StaffDto assignValue(String staffId, String firstName, String lastName,
+                                 String staffDesignation, String gender, String joinedDate,
+                                 String dob, String addressLine01, String addressLine02,
+                                 String addressLine03, String addressLine04, String addressLine05,
+                                 String contact, String email, String jobRole,
+                                 MultipartFile image, String logCode,List<String> fieldIds) throws IOException {
+
+        StaffDto staffDto = new StaffDto();
+        staffDto.setStaffId(staffId);
+        staffDto.setFirstName(firstName);
+        staffDto.setLastName(lastName);
+
+
+        staffDto.setStaffDesignation(JobDesignation.valueOf(staffDesignation));
+        staffDto.setGender(Gender.valueOf(gender.toUpperCase()));
+        staffDto.setJobRole(JobRole.valueOf(jobRole.toUpperCase()));
+
+
+        staffDto.setJoinedDate(joinedDate);
+        staffDto.setDOB(dob);
+
+        staffDto.setAddressLine01(addressLine01);
+        staffDto.setAddressLine02(addressLine02);
+        staffDto.setAddressLine03(addressLine03);
+        staffDto.setAddressLine04(addressLine04);
+        staffDto.setAddressLine05(addressLine05);
+
+
+        staffDto.setContact(contact);
+        staffDto.setEmail(email);
+
+
+        if (image != null && !image.isEmpty()) {
+            staffDto.setImage(AppUtil.convertImage(image));
+        }
+
+        staffDto.setFields(fieldIds);
+        staffDto.setLogCode(logCode);
+
+
+        return staffDto;
     }
 }
