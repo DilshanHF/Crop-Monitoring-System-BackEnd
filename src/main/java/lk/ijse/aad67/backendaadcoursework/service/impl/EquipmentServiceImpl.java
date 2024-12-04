@@ -1,11 +1,14 @@
 package lk.ijse.aad67.backendaadcoursework.service.impl;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.aad67.backendaadcoursework.dto.impl.EquipmentDto;
 import lk.ijse.aad67.backendaadcoursework.dto.status.Status;
 import lk.ijse.aad67.backendaadcoursework.service.EquipmentService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public void saveEquipment(EquipmentDto equipmentDto) {
