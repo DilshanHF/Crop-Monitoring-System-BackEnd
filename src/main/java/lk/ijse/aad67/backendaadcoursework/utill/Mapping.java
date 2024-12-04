@@ -46,7 +46,7 @@ public class Mapping {
         return modelMapper.map(staffDto, StaffEntity.class);
     }
 
-    public List<StaffDto> adStaffDtoList(List<StaffEntity> all) {
+    public List<StaffDto> asStaffDtoList(List<StaffEntity> all) {
         return modelMapper.map(all, new TypeToken<List<StaffDto>>() {}.getType());
     }
 
