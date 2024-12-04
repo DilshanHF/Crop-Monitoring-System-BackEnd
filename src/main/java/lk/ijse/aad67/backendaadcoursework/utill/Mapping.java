@@ -76,7 +76,7 @@ public class Mapping {
         return modelMapper.map(all, new TypeToken<List<LogDto>>() {}.getType());
     }
 
-    public Status toLogDto(LogEntity logEntity) {
+    public LogDto toLogDto(LogEntity logEntity) {
         return modelMapper.map(logEntity, LogDto.class);
     }
 
