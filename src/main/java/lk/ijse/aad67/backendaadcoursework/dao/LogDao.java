@@ -1,6 +1,7 @@
 package lk.ijse.aad67.backendaadcoursework.dao;
 
-import Final.springBoot.backend.entity.impl.LogEntity;
+
+import lk.ijse.aad67.backendaadcoursework.entity.impl.LogEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
