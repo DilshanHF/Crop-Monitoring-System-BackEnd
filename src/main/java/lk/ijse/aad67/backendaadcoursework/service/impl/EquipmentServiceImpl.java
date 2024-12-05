@@ -23,6 +23,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public void saveEquipment(EquipmentDto equipmentDto) {
+        System.out.println(equipmentDto);
         EquipmentEntity save = equipmentDao.save(mapping.toEquipmentEntity(equipmentDto));
         if ( save  == null) {
             throw new DataPersistException();

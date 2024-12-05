@@ -24,9 +24,6 @@ public class EquipmentController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveEquipment(@RequestBody EquipmentDto equipmentDto) {
         System.out.println(equipmentDto);
-        System.out.println("print equ id:"+equipmentDto.getEquipmentId());
-        System.out.println(equipmentDto.getEquipmentName());
-        System.out.println(equipmentDto.getEquipmentId());
         try {
             equipmentService.saveEquipment(equipmentDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
