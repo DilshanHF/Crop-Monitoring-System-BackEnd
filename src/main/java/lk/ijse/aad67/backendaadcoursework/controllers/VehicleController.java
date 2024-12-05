@@ -22,7 +22,7 @@ public class VehicleController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveVehicle(@RequestBody VehicleDto vehicleDto){
-
+        System.out.println(vehicleDto);
         try {
             vehicleService.saveVehicle(vehicleDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -43,6 +43,7 @@ public class VehicleController {
 
     @PutMapping(value = "/{vehicleId}")
     public ResponseEntity<Void> updateVehicle(@PathVariable ("vehicleId") String vehicleId, @RequestBody VehicleDto vehicleDto){
+        System.out.println(vehicleDto);
         try {
             vehicleService.updateVehicle(vehicleId, vehicleDto);
             return new ResponseEntity<>(HttpStatus.CREATED);

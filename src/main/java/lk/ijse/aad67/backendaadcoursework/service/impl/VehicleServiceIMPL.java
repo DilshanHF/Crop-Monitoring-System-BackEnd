@@ -39,8 +39,9 @@ public class VehicleServiceIMPL implements VehicleService {
 
     @Override
     public void saveVehicle(VehicleDto vehicleDto) {
+        System.out.println(vehicleDto);
         VehicleEntity vehicleEntity = mapping.toVehicleEntity(vehicleDto);
-        vehicleEntity.setStaffEntity(staffDao.getReferenceById(vehicleDto.getStaId()));
+        vehicleEntity.setStaffEntity(staffDao.getReferenceById(vehicleDto.getStaffId()));
         VehicleEntity save = vehicleDao.save(vehicleEntity);
 
         if ( save == null) {
@@ -65,13 +66,14 @@ public class VehicleServiceIMPL implements VehicleService {
 
     @Override
     public void updateVehicle(String vehicleId, VehicleDto vehicleDto) {
+        System.out.println(vehicleDto);
         Optional<VehicleEntity> byId = vehicleDao.findById(vehicleId);
         if (byId.isPresent()) {
             byId.get().setPlateNumber(vehicleDto.getPlateNumber());
             byId.get().setVehicleCategory(vehicleDto.getVehicleCategory());
             byId.get().setFuelType(vehicleDto.getFuelType());
             byId.get().setVehicleStatus(vehicleDto.getVehicleStatus());
-            byId.get().setStaffEntity(staffDao.getReferenceById(vehicleDto.getStaId()));
+            byId.get().setStaffEntity(staffDao.getReferenceById(vehicleDto.getStaffId()));
             byId.get().setRemarks(vehicleDto.getRemarks());
         }
 

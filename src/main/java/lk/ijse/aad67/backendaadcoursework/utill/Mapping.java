@@ -13,13 +13,11 @@ import java.util.List;
 
 @Component
 public class Mapping {
-
     @Autowired
     private ModelMapper modelMapper;
 
-
     public CropEntity toCropEntity(CropDto cropDto) {
-       return modelMapper.map(cropDto, CropEntity.class);
+        return modelMapper.map(cropDto, CropEntity.class);
     }
 
     public List<CropDto> asCropDtoList(List<CropEntity> cropAll) {
@@ -46,7 +44,7 @@ public class Mapping {
         return modelMapper.map(staffDto, StaffEntity.class);
     }
 
-    public List<StaffDto> asStaffDtoList(List<StaffEntity> all) {
+    public List<StaffDto> adStaffDtoList(List<StaffEntity> all) {
         return modelMapper.map(all, new TypeToken<List<StaffDto>>() {}.getType());
     }
 
@@ -76,7 +74,7 @@ public class Mapping {
         return modelMapper.map(all, new TypeToken<List<LogDto>>() {}.getType());
     }
 
-    public LogDto toLogDto(LogEntity logEntity) {
+    public Status toLogDto(LogEntity logEntity) {
         return modelMapper.map(logEntity, LogDto.class);
     }
 
@@ -103,7 +101,6 @@ public class Mapping {
     public Status toUserDTO(UserEntity selectedUser) {
         return modelMapper.map(selectedUser, Status.class);
     }
-
 
 
 }

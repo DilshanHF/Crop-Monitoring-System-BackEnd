@@ -18,6 +18,6 @@ public class VehicleDto implements Status {
     private String vehicleCategory;
     private String fuelType;
     private String vehicleStatus;
-    private String staId;
+    private String staffId;
     private String remarks;
 }
