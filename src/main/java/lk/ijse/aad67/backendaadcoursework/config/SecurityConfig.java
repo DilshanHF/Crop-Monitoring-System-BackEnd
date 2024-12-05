@@ -1,5 +1,6 @@
 package lk.ijse.aad67.backendaadcoursework.config;
 
+import lk.ijse.aad67.backendaadcoursework.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
